@@ -1,5 +1,8 @@
 #include<stdlib.h>
 #include<stdio.h>
+void clearscreen(){
+	system("cls");
+}
 int main(){
 	int password,correct=0,i,a;
 	const int real_password=2025;
@@ -28,9 +31,12 @@ int main(){
 		return 0;
 	}
 	
-	
-	
-	
+	clearscreen();
+	printf("------------------------\n");
+	printf("| a.畫出直角三角形   	|\n");
+	printf("| b.顯示乘法表       	|\n");
+	printf("| c.結束             	|\n");
+	printf("------------------------");
 	
 	system("pause");
 	return 0;
