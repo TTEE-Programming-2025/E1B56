@@ -1,10 +1,11 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include<conio.h>//getch()
 void clearscreen(){
 	system("cls");
 }
 int main(){
-	int password,correct=0,i,a;
+	int option,password,correct=0,i,a;
 	const int real_password=2025;
 	
 	//個人風格畫面 
@@ -31,13 +32,43 @@ int main(){
 		return 0;
 	}
 	
-	clearscreen();
+		menu();
+		clearscreen();
+		triangle();
+		
+	system("pause");
+	return 0;
+}
+//主畫面 
+void menu(){
 	printf("------------------------\n");
 	printf("| a.畫出直角三角形   	|\n");
 	printf("| b.顯示乘法表       	|\n");
 	printf("| c.結束             	|\n");
-	printf("------------------------");
-	
-	system("pause");
-	return 0;
+	printf("------------------------\n");
+}
+//直角三角形 
+void triangle(){
+	char ch,i,j;
+	while(1){
+		printf("輸入'a'到'n'的字元:");
+		scanf(" %c",&ch);
+		
+		if(ch>='a'&&ch<='n'){
+			clearscreen();
+			for(i='a';i<=ch;i++){
+				for(j='a';j<=i;j++){
+					printf("%c",j);
+				}
+				printf("\n");
+			}
+			printf("\n按任意鍵回主畫面");
+			getch();
+			clearscreen();
+			menu();
+			break;
+		} else{
+			printf("輸入錯誤");
+		}
+	}
 }
