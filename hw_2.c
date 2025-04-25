@@ -33,9 +33,12 @@ int main(){
 	}
 	
 		menu();
-		clearscreen();
+		clearscreen();		
 		triangle();
 		multiplication();
+		Continue();
+	
+	
 		
 	system("pause");
 	return 0;
@@ -73,6 +76,7 @@ void triangle(){
 		}
 	}
 }
+//乘法表 
 void multiplication(){
 	int n,i,j;
 	while(1){
@@ -93,7 +97,29 @@ void multiplication(){
 			menu();
 			break;	
 		} else{
-			printf("輸入錯誤");
+			printf("輸入錯誤\n");
+		}
+	}
+}
+//是否繼續 
+int Continue(){
+	char choice;
+	while(1){
+		printf("Continue?(y/n):");
+		choice=getch();
+		printf("%c\n",choice);
+		
+		if(choice=='y'||choice=='Y'){
+			clearscreen();
+			menu();
+			return 0;
+		}
+		else if(choice=='n'||choice=='N'){
+			printf("程式結束");
+			return 0;
+		}
+		else{
+			printf("輸入錯誤，請重新輸入\n");
 		}
 	}
 }
