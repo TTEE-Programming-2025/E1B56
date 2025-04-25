@@ -35,6 +35,7 @@ int main(){
 		menu();
 		clearscreen();
 		triangle();
+		multiplication();
 		
 	system("pause");
 	return 0;
@@ -67,6 +68,30 @@ void triangle(){
 			clearscreen();
 			menu();
 			break;
+		} else{
+			printf("輸入錯誤");
+		}
+	}
+}
+void multiplication(){
+	int n,i,j;
+	while(1){
+		printf("輸入1到9的數字:");
+		scanf("%d",&n);
+		
+		if(n>=1&&n<=9){
+			clearscreen();
+			for(i=1;i<=n;i++){
+				for(j=1;j<=n;j++){
+					printf("%d*%d=%d ",i,j,i*j);
+				}
+				printf("\n");
+			}
+			printf("\n按任意鍵回主畫面");
+			getch();
+			clearscreen();
+			menu();
+			break;	
 		} else{
 			printf("輸入錯誤");
 		}
