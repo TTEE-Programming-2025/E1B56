@@ -5,7 +5,7 @@ void clearscreen(){
 	system("cls");
 }
 int main(){
-	int option,password,correct=0,i,a;
+	int option,choice,password,correct=0,i,a;
 	const int real_password=2025;
 	
 	//個人風格畫面 
@@ -32,15 +32,37 @@ int main(){
 		return 0;
 	}
 	
-		menu();
-		clearscreen();		
-		triangle();
-		multiplication();
-		Continue();
-	
-	
+		while (1) {
+        clearscreen();
+        menu();
+        
+        printf("(a/b/c):");
+        choice=getch();
+        printf("%c\n",choice);
+        
+        switch (choice) {
+            case 'a':
+            case 'A':
+                triangle();
+                break;
+            case 'b':
+            case 'B':
+                multiplication();
+                break;
+            case 'c':
+            case 'C':
+                if (Continue()) {
+                    continue; 
+                } else {
+                    return 0; 
+                }
+            default:
+                printf("無效選項，請重新選擇!\n");
+                getch();
+        }
+    }
 		
-	system("pause");
+
 	return 0;
 }
 //主畫面 
@@ -110,9 +132,9 @@ int Continue(){
 		printf("%c\n",choice);
 		
 		if(choice=='y'||choice=='Y'){
-			clearscreen();
-			menu();
-			return 0;
+			//clearscreen();
+			//menu();
+			return 1;
 		}
 		else if(choice=='n'||choice=='N'){
 			printf("程式結束");
