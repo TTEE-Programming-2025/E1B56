@@ -271,7 +271,7 @@ int main() {
         scanf(" %c", &choice);
 
         if (choice == 'a') {
-            displaySeats();  // Show the current available seats
+            displaySeats();
         } else if (choice == 'b') {
             arrangeSeats();  // Let the user arrange seats
         } else if (choice == 'c') {
