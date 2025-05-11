@@ -34,6 +34,7 @@ if(correct==0){
 	clearscreen();
     menu();
     initializeSeats();
+    arrangeSeats();
     
     return 0;
 }
@@ -75,4 +76,92 @@ void displaySeats(){
         printf("\n");
     }
 }
+void arrangeSeats(){
+    int numSeats;
+    printf("How many seats do you need?(1~4):");
+    scanf("%d",&numSeats);
 
+    if (numSeats < 1 || numSeats > 4) {
+        printf("Please enter a valid number of seats(1~4)!\n");
+        return;
+    }
+
+    int i,j,r,c,k,found = 0;
+    if (numSeats <= 3) {
+        for (i = 0; i < row; i++) {
+            for (j = 0; j < col - numSeats + 1; j++) {
+                int canArrange = 1;
+                for (k = 0; k < numSeats; k++) {
+                    if (seat[i][j + k] != '-') {
+                        canArrange = 0;
+                        break;
+                    }
+                }
+                if (canArrange) {
+                    for (k = 0; k < numSeats; k++) {
+                        seat[i][j + k] = '@';
+                    }
+                    found = 1;
+                    displaySeats();
+                    break;
+                }
+            }
+            if (found) break;
+        }
+    } else if (numSeats == 4) {
+        for (i = 0; i < row; i++) {
+            for (j = 0; j < col - 3; j++) {
+                int canArrange = 1,k;
+                for (k = 0; k < 4; k++) {
+                    if (seat[i][j + k] != '-') {
+                        canArrange = 0;
+                        break;
+                    }
+                }
+                if (canArrange) {
+            
+                    for (k = 0; k < 4; k++) {
+                        seat[i][j + k] = '@';
+                    }
+                    found = 1;
+                    displaySeats();
+                    break;
+                }
+            }
+            if (found) break;
+        }
+
+        if (!found) {
+            for (i = 0; i < row - 1; i++) {
+                for (j = 0; j < col; j++) {
+                    if (seat[i][j] == '-' && seat[i + 1][j] == '-') {
+                        seat[i][j] = '@';
+                        seat[i + 1][j] = '@';
+                        found = 1;
+                        displaySeats();
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+        }
+    }
+
+    if (!found) {
+        printf("The requested seats cannot be allocated. Please select a new number of seats.\n");
+    }
+
+    char choice;
+    printf("Are you satisfied with the seat arrangement? (y/n): ");
+    scanf(" %c", &choice);
+
+    if (choice == 'y' || choice == 'Y') {
+        for (i = 0; i < row; i++) {
+            for (j = 0; j < col; j++) {
+                if (seat[i][j] == '@') {
+                    seat[i][j] = '*';
+                }
+            }
+        }
+    }
+}
