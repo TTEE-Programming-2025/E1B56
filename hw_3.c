@@ -35,6 +35,7 @@ if(correct==0){
     menu();
     initializeSeats();
     arrangeSeats();
+    chooseSeats();
     
     return 0;
 }
@@ -163,5 +164,74 @@ void arrangeSeats(){
                 }
             }
         }
+    }
+}
+
+int isValidSeat(int rowNum, int colNum) {
+    // Check if the seat is within bounds and available
+    return (rowNum >= 1 && rowNum <= row && colNum >= 1 && colNum <= col && seat[rowNum - 1][colNum - 1] == '-');
+}
+
+void chooseSeats() {
+    int rowNum, colNum;
+    char choice;
+    int invalidCount = 0;
+
+
+    int selectedSeats[10][2];
+    int selectedCount = 0;
+
+    while (1) {
+    	int i;
+        printf("Please enter your preferred seat (format: row-column, e.g. 1-2)¡G");
+        scanf("%d-%d", &rowNum, &colNum);
+
+        if (isValidSeat(rowNum, colNum)) {
+            selectedSeats[selectedCount][0] = rowNum;
+            selectedSeats[selectedCount][1] = colNum;
+            selectedCount++;
+
+            printf("Selected seats:\n");
+            for (i = 0; i < selectedCount; i++) {
+                printf("seat %d-%d\n", selectedSeats[i][0], selectedSeats[i][1]);
+            }
+        } else {
+            printf("The selected seat is invalid, please select again!\n");
+            invalidCount++;
+        }
+
+        if (invalidCount >= 3) {
+            printf("Multiple inputs are invalid and return to the main menu.\n");
+            return;
+        }
+
+
+        printf("Do you want to continue to select another seat?(y/n): ");
+        scanf(" %c", &choice); 
+
+        if (choice == 'n' || choice == 'N') {
+            break;
+        }
+    }
+
+
+    printf("Your selected seat is as follows:\n");
+    int i;
+    for ( i = 0; i < selectedCount; i++) {
+        printf("seat %d-%d\n", selectedSeats[i][0], selectedSeats[i][1]);
+    }
+
+
+    printf("Are you satisfied with your seat selection? (y/n): ");
+    scanf(" %c", &choice);
+
+    if (choice == 'y' || choice == 'Y') {
+        int i;
+        for (i = 0; i < selectedCount; i++) {
+            seat[selectedSeats[i][0] - 1][selectedSeats[i][1] - 1] = '*';
+        }
+        printf("The seat has been booked successfully!\n");
+    } else {
+        printf("You have cancelled your selection. Return to the main menu.\n");
     }
 }
