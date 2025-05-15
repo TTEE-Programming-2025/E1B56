@@ -1,5 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include<conio.h>
 #define password 2025
 
 //學生結構定義
@@ -53,10 +54,28 @@ void entergrades() {
 			printf("錯誤!英文(0-100):");
 			scanf("%d",&stu[i].english);
 		}
-	stu[i].avg=stu[i].math+stu[i].phy+stu[i].english/3.0;
+	stu[i].avg=(stu[i].math+stu[i].phy+stu[i].english)/3.0;
 	}
 	clearscreen();
 }
+
+// 顯示所有學生資料
+void displayGrades(){
+	int i;
+    clearscreen();
+    printf("姓名\t學號\t數學\t物理\t英文\t平均\n");
+    for (i = 0; i < n; i++) {
+        printf("%s\t%d\t%d\t%d\t%d\t%.1f\n",stu[i].name,stu[i].id,stu[i].math,stu[i].phy,stu[i].english,stu[i].avg);
+    }
+    pause();
+    clearscreen();
+}
+
+void pause(){
+    printf("\n請按任意鍵繼續...");
+    getch();
+}
+
 //清除螢幕
 void clearscreen(){
 	system("cls");
@@ -97,6 +116,7 @@ int main(){
 	}
 	clearscreen();
 	menu();
+
 	
 	return 0;
 }
